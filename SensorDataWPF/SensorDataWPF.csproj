@@ -7,4 +7,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Galileo">
+      <HintPath>..\Galileo.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

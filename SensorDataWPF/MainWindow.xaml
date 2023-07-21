@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SensorDataWPF"
         mc:Ignorable="d" FontSize="14"
-        Title="Data Processing" Height="470" Width="1000">
+        Title="Data Processing" Height="470" Width="1020">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -43,9 +43,18 @@
         <ComboBox Grid.Column="2" Grid.Row="2" x:Name="cmbSigma"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Mu" Margin="0,5"/>
         <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cmbMu" Margin="0,5"/>
-        <Button Grid.Column="1" Grid.Row="4" x:Name="btnLoadData" Content="Load Sensor Data" Grid.ColumnSpan="2" Margin="0,5,0,5"/>
-        <ListView Grid.Column="1" Grid.Row="5" x:Name="lvSensors" Width="200" Grid.RowSpan="6" Grid.ColumnSpan="2" />
-        
+        <Button Grid.Column="1" Grid.Row="4" x:Name="btnLoadData" Content="Load Sensor Data" Grid.ColumnSpan="2" Margin="0,5,0,5" Click="btnLoadData_Click"/>
+        <ListView Grid.Column="1" Grid.Row="5" x:Name="lvSensors" Width="200" Grid.RowSpan="6" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <!-- First Column: Sensor A -->
+                    <GridViewColumn Header="Sensor A" Width="100" DisplayMemberBinding="{Binding Path=SensorAData}" />
+                    <!-- Second Column: Sensor B -->
+                    <GridViewColumn Header="Sensor B" Width="100" DisplayMemberBinding="{Binding Path=SensorBData}" />                    
+                </GridView>                
+            </ListView.View>
+        </ListView>
+
         <!--Columns 3&4&5 Sensors A-->
         <TextBlock Grid.Column="3" Grid.Row="2" Text="Search Target:" Margin="80,0,5,0"/>
         <TextBox Grid.Column="4" Grid.Row="2" x:Name="txtSensorAInput" Width="40" Margin="0,0,0,0"/>
