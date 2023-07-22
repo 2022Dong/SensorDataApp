@@ -18,6 +18,7 @@ namespace SensorDataWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Dongyun Huang 30042104
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -49,8 +50,8 @@ namespace SensorDataWPF
 
             const int LinkedListSize = 400;
 
-            double mu = cmbMu.SelectedIndex;
-            double sigma = cmbSigma.SelectedIndex;
+            double mu = 0.0;
+            double sigma = 0.0;
 
             // Populate Sensor A data
             for (int i = 0; i < LinkedListSize; i++)
