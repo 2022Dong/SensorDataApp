@@ -74,6 +74,18 @@ namespace SensorDataWPF
         // Add column titles “Sensor A” and “Sensor B” to the ListView. The input parameters are empty, and the return type is void. 
         public void ShowAllSensorData()
         {
+            lvSensors.Items.Clear();
+
+            // Traverse both LinkedLists simultaneously and add items to the ListView
+            var listAEnumerator = SensorAData.GetEnumerator();
+            var listBEnumerator = SensorAData.GetEnumerator();
+
+            while (listAEnumerator.MoveNext() && listBEnumerator.MoveNext())
+            {
+                //ListViewItem item = new ListViewItem(new string[] { listAEnumerator.Current.ToString(), listBEnumerator.Current.ToString() });
+                
+                //lvSensors.Items.Add(item);
+            }
 
         }
 
@@ -83,6 +95,7 @@ namespace SensorDataWPF
         {
             LoadData(SensorAData, SensorBData);
             ShowAllSensorData();
+            MessageBox.Show("test btn");
         }
         #endregion
 
@@ -91,24 +104,22 @@ namespace SensorDataWPF
         // The method signature will have an input parameter of type LinkedList, and the calling code argument is the linkedlist name. 
         private int NumberOfNodes(LinkedList<double> newLinkedList)
         {
-            int count = 0;
-            LinkedListNode<double> current = newLinkedList.First;
-
-            while (current != null)
-            {
-                count++;
-                current = current.Next;
-            }
-
-            return count;
+            return newLinkedList.Count;
         }
 
         // 4.6 Create a method called “DisplayListboxData” that will display the content of a LinkedList inside the appropriate ListBox.
         // The method signature will have two input parameters; a LinkedList, and the ListBox name.
         // The calling code argument is the linkedlist name and the listbox name. 
-        private void DisplayListboxData(LinkedList<double> newLinkedList, string newListBoxName)
+        private void DisplayListboxData(LinkedList<double> newLinkedList, ListBox newListBox)
         {
+            newListBox.Items.Clear();
 
+            // Traverse the LinkedList and add items to the ListBox
+            var enumerator = newLinkedList.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                newListBox.Items.Add(enumerator.Current);
+            }
         }
         #endregion
 
@@ -121,6 +132,7 @@ namespace SensorDataWPF
             
             return false;  //  --- to be fixed
         }
+
 
         // 4.8 Create a method called “InsertionSort” which has a single parameter of type LinkedList,
         // while the calling code argument is the linkedlist name.
@@ -179,6 +191,19 @@ namespace SensorDataWPF
         // Set the default value to 10. The value for Mu must be limited with a minimum of 35 and a maximum of 75. Set the default value to 50. 
 
         // 4.14 Add two textboxes for the search value; one for each sensor, ensure only numeric integer values can be entered. 
+        // Event handler to allow only numeric integer values in the TextBox
+        private void NumericIntegerTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Check if the input is a numeric integer (contains only digits)
+            foreach (char c in e.Text)
+            {
+                if (!char.IsDigit(c))
+                {
+                    e.Handled = true; // Set to true to prevent the invalid character from being entered.
+                    break;
+                }
+            }
+        }
 
         // 4.15 All code is required to be adequately commented.
 
